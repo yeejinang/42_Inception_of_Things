@@ -14,9 +14,20 @@ spec:
     spec:
       containers:
       - name: app-one
-        image: nginx
+        image: yeejinang/k3s-app:latest
         ports:
         - containerPort: 80
+        env:
+        - name: MESSAGE
+          value: "Hello from app1."
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: MY_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
 ---
 apiVersion: v1
 kind: Service
